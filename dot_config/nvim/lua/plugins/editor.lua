@@ -1,44 +1,25 @@
 return {
-    -- Syntax highlighting + text objects
+    -- Syntax highlighting (nvim-treesitter v1.0+ API)
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
-        dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash", "c", "cpp", "go", "gomod", "gosum",
-                    "json", "lua", "markdown", "python", "rust",
-                    "toml", "vim", "vimdoc", "yaml",
-                },
-                highlight = { enable = true },
-                indent = { enable = true },
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        keymaps = {
-                            ["af"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                            ["ac"] = "@class.outer",
-                            ["ic"] = "@class.inner",
-                            ["aa"] = "@parameter.outer",
-                            ["ia"] = "@parameter.inner",
-                        },
-                    },
-                    move = {
-                        enable = true,
-                        goto_next_start = {
-                            ["]f"] = "@function.outer",
-                            ["]c"] = "@class.outer",
-                        },
-                        goto_prev_start = {
-                            ["[f"] = "@function.outer",
-                            ["[c"] = "@class.outer",
-                        },
-                    },
-                },
+            require("nvim-treesitter").setup()
+
+            -- Install parsers (async, runs in background)
+            require("nvim-treesitter.install").install({
+                "bash", "c", "cpp", "go", "gomod", "gosum",
+                "json", "lua", "markdown", "python", "rust",
+                "toml", "vim", "vimdoc", "yaml",
+            })
+
+            -- Enable treesitter highlight + indent for every buffer
+            -- (uses nvim's built-in vim.treesitter when a parser is available)
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(args)
+                    pcall(vim.treesitter.start, args.buf)
+                end,
             })
         end,
     },
