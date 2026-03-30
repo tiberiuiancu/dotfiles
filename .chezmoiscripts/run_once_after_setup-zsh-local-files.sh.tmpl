@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-# Creates starter ~/.zshenv, ~/.zprofile, ~/.zshrc on new machines.
-# Each file sources its shared counterpart managed by chezmoi.
+# Creates starter ~/.zshenv, ~/.zprofile, ~/.zshrc, ~/.bashrc, ~/.bash_profile
+# on new machines. Each sources its shared chezmoi-managed counterpart.
 # Only creates the file if it doesn't exist — never overwrites.
 
 setup_file() {
@@ -22,6 +22,8 @@ setup_file() {
     fi
 }
 
-setup_file "$HOME/.zshenv"   "source ~/.config/zsh/zshenv.shared"
-setup_file "$HOME/.zprofile" "source ~/.config/zsh/zprofile.shared"
-setup_file "$HOME/.zshrc"    "source ~/.config/zsh/zshrc.shared"
+setup_file "$HOME/.zshenv"        "source ~/.config/zsh/zshenv.shared"
+setup_file "$HOME/.zprofile"      "source ~/.config/zsh/zprofile.shared"
+setup_file "$HOME/.zshrc"         "source ~/.config/zsh/zshrc.shared"
+setup_file "$HOME/.bashrc"        "source ~/.config/bash/bashrc.shared"
+setup_file "$HOME/.bash_profile"  "source ~/.config/bash/bashrc.shared"

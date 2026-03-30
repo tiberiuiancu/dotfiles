@@ -1,0 +1,8 @@
+# Ensure ~/.local/bin is on PATH (used for no-root installs e.g. compiled zsh)
+export PATH="$HOME/.local/bin:$PATH"
+
+# Launch zsh if available and we're not already in zsh
+# This handles systems where chsh is not available (e.g. compute clusters)
+if [ -z "$ZSH_VERSION" ] && command -v zsh &>/dev/null; then
+    exec zsh -l
+fi

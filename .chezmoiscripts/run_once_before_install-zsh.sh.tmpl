@@ -1,0 +1,58 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+set -euo pipefail
+
+ZSH_VERSION="5.9"
+ZSH_PREFIX="$HOME/.local"
+
+# Already installed — nothing to do
+if command -v zsh &>/dev/null; then
+    exit 0
+fi
+
+{{ if .has_sudo -}}
+# Install via package manager
+{{ if eq .chezmoi.osRelease.id "ubuntu" -}}
+sudo apt-get install -y zsh
+{{ else if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -S --needed --noconfirm zsh
+{{ end -}}
+{{ else -}}
+# No sudo — compile from source into ~/.local/
+echo "Compiling zsh ${ZSH_VERSION} into ${ZSH_PREFIX} ..."
+
+BUILD_DIR=$(mktemp -d)
+trap 'rm -rf "$BUILD_DIR"' EXIT
+
+curl -fsSL "https://sourceforge.net/projects/zsh/files/zsh/${ZSH_VERSION}/zsh-${ZSH_VERSION}.tar.xz/download" \
+    -o "$BUILD_DIR/zsh.tar.xz"
+tar -xf "$BUILD_DIR/zsh.tar.xz" -C "$BUILD_DIR"
+cd "$BUILD_DIR/zsh-${ZSH_VERSION}"
+
+./configure \
+    --prefix="$ZSH_PREFIX" \
+    --without-tcsetpgrp \
+    CPPFLAGS="-I/usr/include/ncurses"
+
+make -j"$(nproc)"
+make install
+
+echo "zsh installed to ${ZSH_PREFIX}/bin/zsh"
+{{ end -}}
+
+# Set zsh as default shell if possible
+ZSH_PATH=$(command -v zsh || echo "${ZSH_PREFIX}/bin/zsh")
+
+if [ -x "$ZSH_PATH" ]; then
+{{ if .has_sudo -}}
+    # Add to /etc/shells if not already there
+    if ! grep -qF "$ZSH_PATH" /etc/shells; then
+        echo "$ZSH_PATH" | sudo tee -a /etc/shells
+    fi
+    chsh -s "$ZSH_PATH" "$USER" && echo "Default shell set to $ZSH_PATH"
+{{ else -}}
+    # No sudo — shell will be launched from .bashrc instead
+    echo "Cannot run chsh without sudo. zsh will be launched from .bashrc."
+{{ end -}}
+fi
+{{ end -}}

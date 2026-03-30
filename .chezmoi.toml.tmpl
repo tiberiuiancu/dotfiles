@@ -1,2 +1,5 @@
 [bitwarden]
     command = "bw"
+
+[data]
+    has_sudo = {{ promptBoolOnce . "has_sudo" "Does this machine have sudo/root access?" true }}
