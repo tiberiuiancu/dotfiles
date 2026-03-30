@@ -104,17 +104,17 @@ return {
             -- 1. mason
             require("mason").setup({ ui = { border = "rounded" } })
 
-            -- 2. mason-lspconfig (must come before any lspconfig.X.setup call)
+            -- 2. mason-lspconfig
             require("mason-lspconfig").setup({ automatic_installation = true })
 
-            -- 3. capabilities from cmp
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            -- 3. Global capabilities (applied to every server)
+            vim.lsp.config("*", {
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            })
 
-            local lspconfig = require("lspconfig")
-
-            -- Python
-            lspconfig.pyright.setup({
-                capabilities = capabilities,
+            -- 4. Per-server config overrides (nvim 0.11+ native API)
+            --    Base configs (cmd, filetypes) come from lspconfig's lsp/ dir on runtimepath.
+            vim.lsp.config("pyright", {
                 settings = {
                     python = {
                         analysis = {
@@ -126,9 +126,7 @@ return {
                 },
             })
 
-            -- C / C++
-            lspconfig.clangd.setup({
-                capabilities = capabilities,
+            vim.lsp.config("clangd", {
                 cmd = {
                     "clangd",
                     "--background-index",
@@ -139,9 +137,7 @@ return {
                 },
             })
 
-            -- Go
-            lspconfig.gopls.setup({
-                capabilities = capabilities,
+            vim.lsp.config("gopls", {
                 settings = {
                     gopls = {
                         analyses = { unusedparams = true, shadow = true },
@@ -155,6 +151,9 @@ return {
                     },
                 },
             })
+
+            -- 5. Enable servers (start when matching filetype buffer opens)
+            vim.lsp.enable({ "pyright", "clangd", "gopls" })
         end,
     },
 
