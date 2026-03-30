@@ -87,8 +87,8 @@ return {
                 "WhoIsSethDaniel/mason-tool-installer.nvim",
                 opts = {
                     ensure_installed = {
-                        "pyright", "clangd", "gopls",
-                        "ruff", "goimports", "clang-format",
+                        "pyright", "clangd",
+                        "ruff", "clang-format",
                     },
                     auto_update = true,
                 },
@@ -137,23 +137,8 @@ return {
                 },
             })
 
-            vim.lsp.config("gopls", {
-                settings = {
-                    gopls = {
-                        analyses = { unusedparams = true, shadow = true },
-                        staticcheck = true,
-                        gofumpt = true,
-                        hints = {
-                            parameterNames = true,
-                            assignVariableTypes = true,
-                            functionTypeParameters = true,
-                        },
-                    },
-                },
-            })
-
             -- 5. Enable servers (start when matching filetype buffer opens)
-            vim.lsp.enable({ "pyright", "clangd", "gopls" })
+            vim.lsp.enable({ "pyright", "clangd" })
         end,
     },
 
