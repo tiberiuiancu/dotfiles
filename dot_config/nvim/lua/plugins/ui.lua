@@ -29,7 +29,7 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons", "catppuccin" },
         opts = {
             options = {
                 theme = "catppuccin",
