@@ -19,6 +19,7 @@ packages:
       - rtk
       - tmux
       - tree
+      - tree-sitter
       - uv
       - wget
     casks:
