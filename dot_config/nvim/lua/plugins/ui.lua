@@ -33,7 +33,7 @@ return {
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = require("catppuccin.groups.integrations.lualine").get(),
+                    theme = "catppuccin-mocha",
                     globalstatus = true,
                     component_separators = { left = "", right = "" },
                     section_separators = { left = "", right = "" },
