@@ -5,12 +5,16 @@ Personal dotfiles managed with [chezmoi](https://chezmoi.io).
 ## Install on a new machine
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/tiberiuiancu/dotfiles/main/install.sh)
+bash <(curl -fsSL https://tiberiu.nl/setup.sh)
+# or
+bash <(wget -qO- https://tiberiu.nl/setup.sh)
 ```
 
 > **Why `bash <(...)` instead of `curl | bash`?**
 > The setup prompts for per-machine config (e.g. sudo access). That requires an
 > interactive TTY, which `curl | bash` destroys. `bash <(...)` keeps it.
+> `tiberiu.nl/setup.sh` handles this automatically via `exec < /dev/tty`, but
+> `bash <(...)` is still the safer invocation.
 
 On first run you will be asked:
 - **Does this machine have sudo/root access?** — answer `false` on compute clusters
