@@ -7,15 +7,7 @@ return {
         config = function()
             require("nvim-treesitter").setup()
 
-            -- Install parsers (async, runs in background)
-            require("nvim-treesitter.install").install({
-                "bash", "c", "cpp", "go", "gomod", "gosum",
-                "json", "lua", "markdown", "python", "rust",
-                "toml", "vim", "vimdoc", "yaml",
-            })
-
-            -- Enable treesitter highlight + indent for every buffer
-            -- (uses nvim's built-in vim.treesitter when a parser is available)
+            -- Enable treesitter highlight for every buffer (parser installed on demand)
             vim.api.nvim_create_autocmd("FileType", {
                 callback = function(args)
                     pcall(vim.treesitter.start, args.buf)
