@@ -1,0 +1,27 @@
+#!/bin/bash
+set -euo pipefail
+
+# Creates starter ~/.zshenv, ~/.zprofile, ~/.zshrc on new machines.
+# Each file sources its shared counterpart managed by chezmoi.
+# Only creates the file if it doesn't exist — never overwrites.
+
+setup_file() {
+    local file="$1"
+    local source_line="$2"
+
+    if [ ! -f "$file" ]; then
+        echo "$source_line" > "$file"
+        echo "Created $file"
+    elif ! grep -qF "$source_line" "$file"; then
+        # File exists but doesn't source the shared config yet — prepend it
+        local tmp
+        tmp=$(mktemp)
+        { echo "$source_line"; echo; cat "$file"; } > "$tmp"
+        mv "$tmp" "$file"
+        echo "Prepended source line to $file"
+    fi
+}
+
+setup_file "$HOME/.zshenv"   "source ~/.config/zsh/zshenv.shared"
+setup_file "$HOME/.zprofile" "source ~/.config/zsh/zprofile.shared"
+setup_file "$HOME/.zshrc"    "source ~/.config/zsh/zshrc.shared"

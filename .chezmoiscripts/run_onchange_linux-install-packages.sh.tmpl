@@ -1,0 +1,39 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+set -euo pipefail
+
+# packages.yaml hash: {{ include ".chezmoidata/packages.yaml" | sha256sum }}
+
+{{ if eq .chezmoi.osRelease.id "ubuntu" -}}
+sudo apt-get update -q
+sudo apt-get install -y \
+  {{ range .packages.ubuntu.apt -}}
+  {{ . }} \
+  {{ end }}
+
+# GitHub CLI (requires its own apt repo)
+if ! command -v gh &>/dev/null; then
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt-get update -q
+    sudo apt-get install -y gh
+fi
+
+{{ else if eq .chezmoi.osRelease.id "arch" -}}
+sudo pacman -Syu --needed --noconfirm \
+  {{ range .packages.arch.pacman -}}
+  {{ . }} \
+  {{ end }}
+
+# AUR helper (paru) — needed for AUR packages
+if ! command -v paru &>/dev/null; then
+    git clone https://aur.archlinux.org/paru-bin.git /tmp/paru-bin
+    cd /tmp/paru-bin && makepkg -si --noconfirm
+    rm -rf /tmp/paru-bin
+fi
+
+{{ end -}}
+{{ end -}}

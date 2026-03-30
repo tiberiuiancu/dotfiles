@@ -1,0 +1,36 @@
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+
+# ALIASES
+alias vim="nvim"
+alias vi="nvim"
+alias ca="conda activate"
+alias cad="conda deactivate"
+alias jn="conda run -v -n base jupyter notebook"
+alias doc="docker compose"
+
+# Rust
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+{{ if eq .chezmoi.os "darwin" -}}
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+{{ else -}}
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+{{ end -}}
+
+export NODE_OPTIONS=--openssl-legacy-provider
+
+# Auto-attach to tmux
+if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+    tmux attach-session -t default 2>/dev/null || tmux new-session -s default
+fi

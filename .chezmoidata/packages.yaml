@@ -1,0 +1,58 @@
+packages:
+  darwin:
+    taps:
+      - anomalyco/tap
+    brews:
+      - bitwarden-cli
+      - chezmoi
+      - cmake
+      - ffmpeg
+      - gh
+      - git
+      - graphviz
+      - imagemagick
+      - neovim
+      - nvm
+      - opencode
+      - poetry
+      - python@3.12
+      - rtk
+      - tmux
+      - tree
+      - uv
+      - wget
+    casks:
+      - bitwarden
+      - claude-code
+      - font-hack-nerd-font
+      - orbstack
+      - visual-studio-code
+
+  ubuntu:
+    apt:
+      - cmake
+      - curl
+      - ffmpeg
+      - git
+      - imagemagick
+      - neovim
+      - python3
+      - python3-pip
+      - tmux
+      - tree
+      - wget
+
+  arch:
+    pacman:
+      - cmake
+      - curl
+      - ffmpeg
+      - git
+      - github-cli
+      - imagemagick
+      - neovim
+      - python
+      - python-poetry
+      - tmux
+      - tree
+      - wget
