@@ -1,136 +1,5 @@
 return {
-    -- LSP installer UI
-    {
-        "williamboman/mason.nvim",
-        cmd = "Mason",
-        keys = { { "<leader>lm", "<cmd>Mason<CR>", desc = "Mason" } },
-        build = ":MasonUpdate",
-        opts = { ui = { border = "rounded" } },
-    },
-
-    -- Install LSPs, formatters, linters via mason
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        dependencies = { "williamboman/mason.nvim" },
-        opts = {
-            ensure_installed = {
-                -- LSPs
-                "pyright",
-                "clangd",
-                "gopls",
-                -- Formatters (used by conform.nvim)
-                "ruff",
-                "goimports",
-                "clang-format",
-            },
-            auto_update = true,
-        },
-    },
-
-    -- Bridge mason <-> lspconfig
-    {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim" },
-        opts = { automatic_installation = true },
-    },
-
-    -- LSP configurations
-    {
-        "neovim/nvim-lspconfig",
-        event = { "BufReadPre", "BufNewFile" },
-        dependencies = {
-            "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/cmp-nvim-lsp",
-            { "folke/lazydev.nvim", ft = "lua", opts = {} },
-            { "j-hui/fidget.nvim",  opts = {} },
-        },
-        config = function()
-            local lspconfig   = require("lspconfig")
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-            -- Python
-            lspconfig.pyright.setup({
-                capabilities = capabilities,
-                settings = {
-                    python = {
-                        analysis = {
-                            typeCheckingMode = "basic",
-                            autoSearchPaths = true,
-                            useLibraryCodeForTypes = true,
-                        },
-                    },
-                },
-            })
-
-            -- C / C++
-            lspconfig.clangd.setup({
-                capabilities = capabilities,
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=iwyu",
-                    "--completion-style=detailed",
-                    "--fallback-style=llvm",
-                },
-            })
-
-            -- Go
-            lspconfig.gopls.setup({
-                capabilities = capabilities,
-                settings = {
-                    gopls = {
-                        analyses = { unusedparams = true, shadow = true },
-                        staticcheck = true,
-                        gofumpt = true,
-                        hints = {
-                            parameterNames = true,
-                            assignVariableTypes = true,
-                            functionTypeParameters = true,
-                        },
-                    },
-                },
-            })
-        end,
-    },
-
-    -- Rust (replaces plain rust-analyzer setup — adds runnables, macro expand, etc.)
-    {
-        "mrcjkb/rustaceanvim",
-        version = "^5",
-        ft = { "rust" },
-        init = function()
-            vim.g.rustaceanvim = {
-                server = {
-                    capabilities = (function()
-                        -- safely grab capabilities if cmp is loaded
-                        local ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-                        return ok and cmp_lsp.default_capabilities() or {}
-                    end)(),
-                    settings = {
-                        ["rust-analyzer"] = {
-                            checkOnSave = { command = "clippy" },
-                            inlayHints = { enable = true },
-                        },
-                    },
-                },
-            }
-            -- Extra Rust keymaps registered at LspAttach for rust files
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("rustacean_keys", { clear = true }),
-                pattern = "*.rs",
-                callback = function(event)
-                    local map = vim.keymap.set
-                    map("n", "<leader>rr", "<cmd>RustLsp runnables<CR>",    { buffer = event.buf, desc = "Rust: Runnables" })
-                    map("n", "<leader>rt", "<cmd>RustLsp testables<CR>",    { buffer = event.buf, desc = "Rust: Testables" })
-                    map("n", "<leader>re", "<cmd>RustLsp expandMacro<CR>",  { buffer = event.buf, desc = "Rust: Expand macro" })
-                    map("n", "<leader>rd", "<cmd>RustLsp debuggables<CR>",  { buffer = event.buf, desc = "Rust: Debuggables" })
-                end,
-            })
-        end,
-    },
-
-    -- Autocompletion
+    -- Autocompletion (loaded early so capabilities are available for LSP setup)
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -206,15 +75,132 @@ return {
         end,
     },
 
+    -- Mason + lspconfig: all in one spec to guarantee setup order
+    -- Required order: mason.setup → mason-lspconfig.setup → lspconfig.X.setup
+    {
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            { "williamboman/mason.nvim",          build = ":MasonUpdate" },
+            { "williamboman/mason-lspconfig.nvim" },
+            {
+                "WhoIsSethDaniel/mason-tool-installer.nvim",
+                opts = {
+                    ensure_installed = {
+                        "pyright", "clangd", "gopls",
+                        "ruff", "goimports", "clang-format",
+                    },
+                    auto_update = true,
+                },
+            },
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "folke/lazydev.nvim", ft = "lua", opts = {} },
+            { "j-hui/fidget.nvim",  opts = {} },
+        },
+        keys = {
+            { "<leader>lm", "<cmd>Mason<CR>", desc = "Mason" },
+        },
+        config = function()
+            -- 1. mason
+            require("mason").setup({ ui = { border = "rounded" } })
+
+            -- 2. mason-lspconfig (must come before any lspconfig.X.setup call)
+            require("mason-lspconfig").setup({ automatic_installation = true })
+
+            -- 3. capabilities from cmp
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+            local lspconfig = require("lspconfig")
+
+            -- Python
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "basic",
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                        },
+                    },
+                },
+            })
+
+            -- C / C++
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "--completion-style=detailed",
+                    "--fallback-style=llvm",
+                },
+            })
+
+            -- Go
+            lspconfig.gopls.setup({
+                capabilities = capabilities,
+                settings = {
+                    gopls = {
+                        analyses = { unusedparams = true, shadow = true },
+                        staticcheck = true,
+                        gofumpt = true,
+                        hints = {
+                            parameterNames = true,
+                            assignVariableTypes = true,
+                            functionTypeParameters = true,
+                        },
+                    },
+                },
+            })
+        end,
+    },
+
+    -- Rust (separate from lspconfig — rustaceanvim manages rust-analyzer directly)
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^5",
+        ft = { "rust" },
+        init = function()
+            vim.g.rustaceanvim = {
+                server = {
+                    capabilities = (function()
+                        local ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+                        return ok and cmp_lsp.default_capabilities() or {}
+                    end)(),
+                    settings = {
+                        ["rust-analyzer"] = {
+                            checkOnSave = { command = "clippy" },
+                            inlayHints = { enable = true },
+                        },
+                    },
+                },
+            }
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("rustacean_keys", { clear = true }),
+                pattern = "*.rs",
+                callback = function(event)
+                    local map = vim.keymap.set
+                    map("n", "<leader>rr", "<cmd>RustLsp runnables<CR>",   { buffer = event.buf, desc = "Rust: Runnables" })
+                    map("n", "<leader>rt", "<cmd>RustLsp testables<CR>",   { buffer = event.buf, desc = "Rust: Testables" })
+                    map("n", "<leader>re", "<cmd>RustLsp expandMacro<CR>", { buffer = event.buf, desc = "Rust: Expand macro" })
+                    map("n", "<leader>rd", "<cmd>RustLsp debuggables<CR>", { buffer = event.buf, desc = "Rust: Debuggables" })
+                end,
+            })
+        end,
+    },
+
     -- Diagnostics panel
     {
         "folke/trouble.nvim",
         cmd = "Trouble",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
-            { "<leader>dd", "<cmd>Trouble diagnostics toggle<CR>",                 desc = "Workspace diagnostics" },
-            { "<leader>db", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>",    desc = "Buffer diagnostics" },
-            { "<leader>ds", "<cmd>Trouble symbols toggle focus=false<CR>",         desc = "Symbols" },
+            { "<leader>dd", "<cmd>Trouble diagnostics toggle<CR>",              desc = "Workspace diagnostics" },
+            { "<leader>db", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Buffer diagnostics" },
+            { "<leader>ds", "<cmd>Trouble symbols toggle focus=false<CR>",      desc = "Symbols" },
         },
         opts = {},
     },
