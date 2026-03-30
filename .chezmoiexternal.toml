@@ -12,3 +12,8 @@
     type = "git-repo"
     url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
     refreshPeriod = "168h"
+
+[".config/kitty/catppuccin-mocha.conf"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/mocha.conf"
+    refreshPeriod = "168h"

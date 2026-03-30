@@ -25,6 +25,7 @@ packages:
       - bitwarden
       - claude-code
       - font-hack-nerd-font
+      - kitty
       - orbstack
       - visual-studio-code
 
