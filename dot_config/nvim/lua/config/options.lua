@@ -5,7 +5,7 @@ local opt = vim.opt
 
 -- Line numbers
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 
 -- Mouse & clipboard
 opt.mouse = "a"
