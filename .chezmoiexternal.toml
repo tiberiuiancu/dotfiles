@@ -17,3 +17,8 @@
     type = "file"
     url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/mocha.conf"
     refreshPeriod = "168h"
+
+[".config/tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm.git"
+    refreshPeriod = "168h"
