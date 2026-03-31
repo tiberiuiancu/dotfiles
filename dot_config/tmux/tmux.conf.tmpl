@@ -35,6 +35,20 @@ bind -r J resize-pane -D 5
 bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
 
+# Clipboard (OSC 52 passthrough — works with kitty)
+set -g set-clipboard on
+
+# Vi copy mode
+setw -g mode-keys vi
+bind -T copy-mode-vi v send -X begin-selection
+{{ if eq .chezmoi.os "darwin" -}}
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
+bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "pbcopy"
+{{ else -}}
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard"
+bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "xclip -selection clipboard"
+{{ end -}}
+
 # Reload config
 bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded"
 
