@@ -16,6 +16,11 @@ ZSH_THEME="robbyrussell"
 
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
+# Store compdump on local disk (avoids slowness on network filesystems like GPFS)
+ZSH_COMPDUMP="${TMPDIR:-/tmp}/zcompdump-${USER}-${ZSH_VERSION}"
+# Skip compaudit security check (slow on network filesystems)
+ZSH_DISABLE_COMPFIX=true
+
 source $ZSH/oh-my-zsh.sh
 
 # ALIASES
