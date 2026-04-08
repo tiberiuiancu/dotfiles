@@ -30,6 +30,9 @@ compinit() {
 
 source $ZSH/oh-my-zsh.sh
 
+# Run sbatch via bash to avoid zsh-specific env issues on SLURM clusters
+sbatch() { bash -c 'sbatch "$@"' _ "$@" }
+
 # ALIASES
 alias vim="nvim"
 alias vi="nvim"
