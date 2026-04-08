@@ -41,7 +41,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export NODE_OPTIONS=--openssl-legacy-provider
 
-# Auto-attach to tmux
-if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+# Auto-attach to tmux (not on remote SSH sessions)
+if command -v tmux &>/dev/null && [ -z "$TMUX" ] && [ -z "$SSH_CONNECTION" ]; then
     tmux attach-session -t default 2>/dev/null || tmux new-session -s default
 fi
