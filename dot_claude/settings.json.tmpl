@@ -5,5 +5,29 @@
     "type": "command",
     "command": "sh {{ .chezmoi.homeDir }}/.claude/statusline-command.sh",
     "intervalMs": 2000
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/read-once/hook.sh"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/read-once/compact.sh"
+          }
+        ]
+      }
+    ]
   }
 }
