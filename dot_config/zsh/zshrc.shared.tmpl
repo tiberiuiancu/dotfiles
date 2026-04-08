@@ -18,8 +18,15 @@ plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 # Store compdump on local disk (avoids slowness on network filesystems like GPFS)
 ZSH_COMPDUMP="${TMPDIR:-/tmp}/zcompdump-${USER}-${ZSH_VERSION}"
-# Skip compaudit security check (slow on network filesystems)
 ZSH_DISABLE_COMPFIX=true
+
+# Intercept compinit to use -C (skip stale-check and rescan; use cached dump)
+# First shell start is slow (builds cache), subsequent ones are fast.
+compinit() {
+    unfunction compinit
+    autoload -Uz compinit
+    compinit -C -d "${ZSH_COMPDUMP}"
+}
 
 source $ZSH/oh-my-zsh.sh
 
