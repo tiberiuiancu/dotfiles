@@ -31,13 +31,21 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
+# Lazy-load nvm — only initialize when node/npm/nvm is first used
+_load_nvm() {
+    unset -f nvm node npm npx
 {{ if eq .chezmoi.os "darwin" -}}
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 {{ else -}}
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 {{ end -}}
+}
+nvm() { _load_nvm; nvm "$@" }
+node() { _load_nvm; node "$@" }
+npm() { _load_nvm; npm "$@" }
+npx() { _load_nvm; npx "$@" }
 
 export NODE_OPTIONS=--openssl-legacy-provider
 
