@@ -3,6 +3,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Launch zsh if available and we're not already in zsh
 # This handles systems where chsh is not available (e.g. compute clusters)
-if [ -z "$ZSH_VERSION" ] && command -v zsh &>/dev/null && ! env | grep -q '^SLURM'; then
+if [[ $- == *i* ]] && [ -z "$ZSH_VERSION" ] && command -v zsh &>/dev/null && ! env | grep -q '^SLURM'; then
     exec zsh -l
 fi
