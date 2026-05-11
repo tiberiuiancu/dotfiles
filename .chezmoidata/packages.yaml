@@ -2,10 +2,8 @@ packages:
   darwin:
     taps:
       - anomalyco/tap
-      - oven-sh/bun
     brews:
       - bitwarden-cli
-      - oven-sh/bun/bun
       - chezmoi
       - cmake
       - ffmpeg
