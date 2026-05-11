@@ -14,13 +14,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -34,13 +34,13 @@
       "model": "opencode-go/deepseek-v4-pro",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode/deepseek-v4-pro"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode-go/deepseek-v4-flash"
@@ -54,13 +54,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -74,13 +74,13 @@
       "model": "opencode-go/deepseek-v4-flash",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode/deepseek-v4-flash"
         },
         {
-          "model": "ollama-cloud/minimax-m2.7"
+          "model": "ollama/minimax-m2.7"
         },
         {
           "model": "opencode-go/minimax-m2.7"
@@ -94,13 +94,13 @@
       "model": "opencode-go/deepseek-v4-flash",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode/deepseek-v4-flash"
         },
         {
-          "model": "ollama-cloud/minimax-m2.7"
+          "model": "ollama/minimax-m2.7"
         },
         {
           "model": "opencode-go/minimax-m2.7"
@@ -114,7 +114,7 @@
       "model": "opencode-go/glm-5.1",
       "fallback_models": [
         {
-          "model": "ollama-cloud/glm-5.1"
+          "model": "ollama/glm-5.1"
         },
         {
           "model": "opencode/glm-5.1"
@@ -125,13 +125,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -145,13 +145,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -165,13 +165,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -185,13 +185,13 @@
       "model": "opencode-go/deepseek-v4-pro",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode/deepseek-v4-pro"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode-go/deepseek-v4-flash"
@@ -200,7 +200,7 @@
           "model": "opencode/deepseek-v4-flash"
         },
         {
-          "model": "ollama-cloud/minimax-m2.7"
+          "model": "ollama/minimax-m2.7"
         },
         {
           "model": "opencode-go/minimax-m2.7"
@@ -214,13 +214,13 @@
       "model": "opencode-go/deepseek-v4-flash",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode/deepseek-v4-flash"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -229,7 +229,7 @@
           "model": "opencode/deepseek-v4-pro"
         },
         {
-          "model": "ollama-cloud/minimax-m2.7"
+          "model": "ollama/minimax-m2.7"
         },
         {
           "model": "opencode-go/minimax-m2.7"
@@ -245,7 +245,7 @@
       "model": "opencode-go/glm-5.1",
       "fallback_models": [
         {
-          "model": "ollama-cloud/glm-5.1"
+          "model": "ollama/glm-5.1"
         },
         {
           "model": "opencode/glm-5.1"
@@ -256,13 +256,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -276,13 +276,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -296,7 +296,7 @@
       "model": "opencode-go/glm-5.1",
       "fallback_models": [
         {
-          "model": "ollama-cloud/glm-5.1"
+          "model": "ollama/glm-5.1"
         },
         {
           "model": "opencode/glm-5.1"
@@ -307,13 +307,13 @@
       "model": "opencode-go/deepseek-v4-flash",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode/deepseek-v4-flash"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -322,7 +322,7 @@
           "model": "opencode/deepseek-v4-pro"
         },
         {
-          "model": "ollama-cloud/minimax-m2.7"
+          "model": "ollama/minimax-m2.7"
         },
         {
           "model": "opencode-go/minimax-m2.7"
@@ -336,13 +336,13 @@
       "model": "opencode-go/deepseek-v4-flash",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode/deepseek-v4-flash"
         },
         {
-          "model": "ollama-cloud/minimax-m2.7"
+          "model": "ollama/minimax-m2.7"
         },
         {
           "model": "opencode-go/minimax-m2.7"
@@ -356,13 +356,13 @@
       "model": "opencode-go/kimi-k2.6",
       "fallback_models": [
         {
-          "model": "ollama-cloud/kimi-k2.6"
+          "model": "ollama/kimi-k2.6"
         },
         {
           "model": "opencode/kimi-k2.6"
         },
         {
-          "model": "ollama-cloud/deepseek-v4-pro"
+          "model": "ollama/deepseek-v4-pro"
         },
         {
           "model": "opencode-go/deepseek-v4-pro"
@@ -376,13 +376,13 @@
       "model": "opencode-go/deepseek-v4-flash",
       "fallback_models": [
         {
-          "model": "ollama-cloud/deepseek-v4-flash"
+          "model": "ollama/deepseek-v4-flash"
         },
         {
           "model": "opencode/deepseek-v4-flash"
         },
         {
-          "model": "ollama-cloud/minimax-m2.7"
+          "model": "ollama/minimax-m2.7"
         },
         {
           "model": "opencode-go/minimax-m2.7"
