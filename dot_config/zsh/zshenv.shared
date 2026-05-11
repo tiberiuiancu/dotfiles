@@ -1,1 +1,4 @@
 . "$HOME/.cargo/env"
+
+# Load API keys
+[ -f "$HOME/.config/zsh/secrets.env" ] && . "$HOME/.config/zsh/secrets.env"
