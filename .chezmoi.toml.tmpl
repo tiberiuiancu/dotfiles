@@ -3,3 +3,4 @@
 
 [data]
     has_sudo = {{ promptBoolOnce . "has_sudo" "Does this machine have sudo/root access?" true }}
+    opencode_surf_api_key = {{ promptStringOnce . "opencode_surf_api_key" "Enter Surf Willma API key (leave empty to skip)" | quote }}

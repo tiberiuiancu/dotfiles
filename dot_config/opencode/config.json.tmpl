@@ -1,0 +1,21 @@
+{{- $key := .opencode_surf_api_key -}}
+{
+  "$schema": "https://opencode.ai/config.json"
+  {{- if $key }},
+  "provider": {
+    "surf": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Surf Willma",
+      "options": {
+        "baseURL": "https://willma.surf.nl/api/v0",
+        "apiKey": "{{ $key }}"
+      },
+      "models": {
+        "Sehyo/Qwen3.5-122B-A10B-NVFP4": {
+          "name": "Qwen3.6-122B"
+        }
+      }
+    }
+  }
+  {{- end }}
+}

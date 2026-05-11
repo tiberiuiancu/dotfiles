@@ -1,0 +1,387 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "hephaestus": {
+      "model": "opencode-go/deepseek-v4-pro",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        }
+      ]
+    },
+    "oracle": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "librarian": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        },
+        {
+          "model": "ollama-cloud/minimax-m2.7"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        },
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    },
+    "explore": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        },
+        {
+          "model": "ollama-cloud/minimax-m2.7"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        },
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    },
+    "multimodal-looker": {
+      "model": "opencode-go/glm-5.1",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/glm-5.1"
+        },
+        {
+          "model": "opencode/glm-5.1"
+        }
+      ]
+    },
+    "prometheus": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "metis": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "momus": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "atlas": {
+      "model": "opencode-go/deepseek-v4-pro",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        },
+        {
+          "model": "ollama-cloud/minimax-m2.7"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        },
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    },
+    "sisyphus-junior": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        },
+        {
+          "model": "ollama-cloud/minimax-m2.7"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        },
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "opencode-go/glm-5.1",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/glm-5.1"
+        },
+        {
+          "model": "opencode/glm-5.1"
+        }
+      ]
+    },
+    "ultrabrain": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "deep": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "artistry": {
+      "model": "opencode-go/glm-5.1",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/glm-5.1"
+        },
+        {
+          "model": "opencode/glm-5.1"
+        }
+      ]
+    },
+    "quick": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        },
+        {
+          "model": "ollama-cloud/minimax-m2.7"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        },
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    },
+    "unspecified-low": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        },
+        {
+          "model": "ollama-cloud/minimax-m2.7"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        },
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    },
+    "unspecified-high": {
+      "model": "opencode-go/kimi-k2.6",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/kimi-k2.6"
+        },
+        {
+          "model": "opencode/kimi-k2.6"
+        },
+        {
+          "model": "ollama-cloud/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode-go/deepseek-v4-pro"
+        },
+        {
+          "model": "opencode/deepseek-v4-pro"
+        }
+      ]
+    },
+    "writing": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "fallback_models": [
+        {
+          "model": "ollama-cloud/deepseek-v4-flash"
+        },
+        {
+          "model": "opencode/deepseek-v4-flash"
+        },
+        {
+          "model": "ollama-cloud/minimax-m2.7"
+        },
+        {
+          "model": "opencode-go/minimax-m2.7"
+        },
+        {
+          "model": "opencode/minimax-m2.7"
+        }
+      ]
+    }
+  }
+}

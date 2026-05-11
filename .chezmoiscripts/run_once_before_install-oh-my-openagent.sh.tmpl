@@ -1,0 +1,27 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+if ! command -v bun &> /dev/null; then
+    echo "bun not found, skipping oh-my-openagent install"
+    exit 0
+fi
+
+# Skip if config already exists — chezmoi manages it via source
+if [ -f "$HOME/.config/opencode/oh-my-openagent.json" ]; then
+    echo "oh-my-openagent config already exists, skipping install"
+    exit 0
+fi
+
+bunx oh-my-opencode install --no-tui \
+    --claude=max20 \
+    --openai=no \
+    --gemini=no \
+    --copilot=no \
+    --opencode-zen=yes \
+    --opencode-go=yes \
+    --zai-coding-plan=no \
+    --kimi-for-coding=no \
+    --vercel-ai-gateway=no \
+    --skip-auth
+{{ end -}}
