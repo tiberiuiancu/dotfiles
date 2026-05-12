@@ -1,0 +1,66 @@
+# OpenCode AI Provider Configuration
+# Edit this file to change provider priority, agent models, and fallback chains
+# Then run: chezmoi apply ~/.config/opencode/oh-my-openagent.json
+
+# Provider priority (first = highest priority)
+providers:
+  - opencode-go
+  - ollama
+  - opencode
+
+# Model fallback chains (if a model fails, try the next one in the list)
+# These apply across ALL providers - the template will prepend each provider prefix
+model_fallbacks:
+  default:
+    - kimi-k2.6
+    - deepseek-v4-pro
+    - deepseek-v4-flash
+    - minimax-m2.7
+  fast:
+    - deepseek-v4-flash
+    - deepseek-v4-pro
+    - minimax-m2.7
+  vision:
+    - glm-5.1
+    - glm-4.7
+
+# Agent model assignments
+# Each agent gets a primary model. Fallbacks are auto-generated from model_fallbacks.
+# Format: "<model-name>" or "<model-name>@<fallback-chain-name>"
+# If no fallback chain specified, uses "default"
+agents:
+  sisyphus: kimi-k2.6
+  hephaestus: deepseek-v4-pro
+  oracle: kimi-k2.6
+  prometheus: kimi-k2.6
+  metis: kimi-k2.6
+  momus: kimi-k2.6
+  atlas: deepseek-v4-pro
+  # Fast/cheap agents use the "fast" fallback chain
+  librarian: deepseek-v4-flash@fast
+  explore: deepseek-v4-flash@fast
+  sisyphus-junior: deepseek-v4-flash@fast
+  # Vision agent uses the "vision" fallback chain
+  multimodal-looker: glm-5.1@vision
+
+# Category model assignments (same format as agents)
+categories:
+  visual-engineering: glm-5.1@vision
+  ultrabrain: kimi-k2.6
+  deep: kimi-k2.6
+  artistry: glm-5.1@vision
+  quick: deepseek-v4-flash@fast
+  unspecified-low: deepseek-v4-flash@fast
+  unspecified-high: kimi-k2.6
+  writing: deepseek-v4-flash@fast
+
+# Plugin behavior settings
+plugin:
+  model_fallback: true
+  runtime_fallback:
+    enabled: true
+    retry_on_errors: [400, 401, 403, 404, 429, 500, 502, 503, 504, 529, 1308, 1310]
+    max_fallback_attempts: 3
+    cooldown_seconds: 15
+    timeout_seconds: 10
+    notify_on_fallback: true

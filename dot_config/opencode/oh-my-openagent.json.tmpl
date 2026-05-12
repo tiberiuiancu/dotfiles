@@ -1,0 +1,82 @@
+{{- $providers := .providers -}}
+{{- $fallbacks := .model_fallbacks -}}
+{{- $primaryProvider := index $providers 0 -}}
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/dev/assets/oh-my-opencode.schema.json",
+  "model_fallback": {{ .plugin.model_fallback }},
+  "runtime_fallback": {{ toJson .plugin.runtime_fallback }},
+  "agents": {
+{{- $firstAgent := true -}}
+{{- range $agentName, $agentSpec := .agents }}
+  {{- if not $firstAgent }},{{ end }}{{- $firstAgent = false }}
+  {{- $parts := splitList "@" $agentSpec -}}
+  {{- $model := index $parts 0 -}}
+  {{- $chain := "default" -}}
+  {{- if eq (len $parts) 2 }}{{ $chain = index $parts 1 }}{{ end }}
+  {{- $chainModels := index $fallbacks $chain }}
+    "{{ $agentName }}": {
+      "model": "{{ $primaryProvider }}/{{ $model }}",
+      "fallback_models": [
+{{- $firstFallback := true -}}
+{{- /* 1. Same model on other providers */}}
+{{- range $provider := $providers }}
+  {{- if ne $provider $primaryProvider }}
+    {{- if not $firstFallback }},{{ end }}{{- $firstFallback = false }}
+        {
+          "model": "{{ $provider }}/{{ $model }}"
+        }
+  {{- end }}
+{{- end }}
+{{- /* 2. Other models in the chain, all providers */}}
+{{- range $modelName := $chainModels }}
+  {{- if ne $modelName $model }}
+    {{- range $provider := $providers }}
+      {{- if not $firstFallback }},{{ end }}{{- $firstFallback = false }}
+        {
+          "model": "{{ $provider }}/{{ $modelName }}"
+        }
+    {{- end }}
+  {{- end }}
+{{- end }}
+      ]
+    }
+{{- end }}
+  },
+  "categories": {
+{{- $firstCat := true -}}
+{{- range $catName, $catSpec := .categories }}
+  {{- if not $firstCat }},{{ end }}{{- $firstCat = false }}
+  {{- $parts := splitList "@" $catSpec -}}
+  {{- $model := index $parts 0 -}}
+  {{- $chain := "default" -}}
+  {{- if eq (len $parts) 2 }}{{ $chain = index $parts 1 }}{{ end }}
+  {{- $chainModels := index $fallbacks $chain }}
+    "{{ $catName }}": {
+      "model": "{{ $primaryProvider }}/{{ $model }}",
+      "fallback_models": [
+{{- $firstFallback := true -}}
+{{- /* 1. Same model on other providers */}}
+{{- range $provider := $providers }}
+  {{- if ne $provider $primaryProvider }}
+    {{- if not $firstFallback }},{{ end }}{{- $firstFallback = false }}
+        {
+          "model": "{{ $provider }}/{{ $model }}"
+        }
+  {{- end }}
+{{- end }}
+{{- /* 2. Other models in the chain, all providers */}}
+{{- range $modelName := $chainModels }}
+  {{- if ne $modelName $model }}
+    {{- range $provider := $providers }}
+      {{- if not $firstFallback }},{{ end }}{{- $firstFallback = false }}
+        {
+          "model": "{{ $provider }}/{{ $modelName }}"
+        }
+    {{- end }}
+  {{- end }}
+{{- end }}
+      ]
+    }
+{{- end }}
+  }
+}
