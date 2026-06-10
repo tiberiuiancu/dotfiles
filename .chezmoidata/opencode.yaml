@@ -35,11 +35,11 @@ agents:
   prometheus: kimi-k2.6
   metis: kimi-k2.6
   momus: kimi-k2.6
-  atlas: deepseek-v4-pro
+  atlas: kimi-k2.6 # deepseek-v4-pro
   # Fast/cheap agents use the "fast" fallback chain
   librarian: deepseek-v4-flash@fast
   explore: deepseek-v4-flash@fast
-  sisyphus-junior: deepseek-v4-flash@fast
+  sisyphus-junior: kimi-k2.6 #deepseek-v4-flash@fast
   # Vision agent uses the "vision" fallback chain
   multimodal-looker: glm-5.1@vision
 
@@ -49,8 +49,8 @@ categories:
   ultrabrain: kimi-k2.6
   deep: kimi-k2.6
   artistry: glm-5.1@vision
-  quick: deepseek-v4-flash@fast
-  unspecified-low: deepseek-v4-flash@fast
+  quick: kimi-k2.6 # deepseek-v4-flash@fast
+  unspecified-low: kimi-k2.6 # deepseek-v4-flash@fast
   unspecified-high: kimi-k2.6
   writing: deepseek-v4-flash@fast
 
