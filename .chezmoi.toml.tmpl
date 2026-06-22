@@ -3,4 +3,3 @@
 
 [data]
     has_sudo = {{ promptBoolOnce . "has_sudo" "Does this machine have sudo/root access?" true }}
-    ollama_api_key = "{{ promptStringOnce . "ollama_api_key" "Enter your Ollama Cloud API key:" }}"
