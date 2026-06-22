@@ -12,7 +12,7 @@ providers:
 # These apply across ALL providers - the template will prepend each provider prefix
 model_fallbacks:
   default:
-    - kimi-k2.6
+    - kimi-k2.7-code
     - deepseek-v4-pro
     - deepseek-v4-flash
     - minimax-m2.7
@@ -29,29 +29,29 @@ model_fallbacks:
 # Format: "<model-name>" or "<model-name>@<fallback-chain-name>"
 # If no fallback chain specified, uses "default"
 agents:
-  sisyphus: kimi-k2.6
+  sisyphus: kimi-k2.7-code
   hephaestus: deepseek-v4-pro
-  oracle: kimi-k2.6
-  prometheus: kimi-k2.6
-  metis: kimi-k2.6
-  momus: kimi-k2.6
-  atlas: kimi-k2.6 # deepseek-v4-pro
+  oracle: kimi-k2.7-code
+  prometheus: kimi-k2.7-code
+  metis: kimi-k2.7-code
+  momus: kimi-k2.7-code
+  atlas: kimi-k2.7-code # deepseek-v4-pro
   # Fast/cheap agents use the "fast" fallback chain
   librarian: deepseek-v4-flash@fast
   explore: deepseek-v4-flash@fast
-  sisyphus-junior: kimi-k2.6 #deepseek-v4-flash@fast
+  sisyphus-junior: kimi-k2.7-code #deepseek-v4-flash@fast
   # Vision agent uses the "vision" fallback chain
   multimodal-looker: glm-5.1@vision
 
 # Category model assignments (same format as agents)
 categories:
   visual-engineering: glm-5.1@vision
-  ultrabrain: kimi-k2.6
-  deep: kimi-k2.6
+  ultrabrain: kimi-k2.7-code
+  deep: kimi-k2.7-code
   artistry: glm-5.1@vision
-  quick: kimi-k2.6 # deepseek-v4-flash@fast
-  unspecified-low: kimi-k2.6 # deepseek-v4-flash@fast
-  unspecified-high: kimi-k2.6
+  quick: kimi-k2.7-code # deepseek-v4-flash@fast
+  unspecified-low: kimi-k2.7-code # deepseek-v4-flash@fast
+  unspecified-high: kimi-k2.7-code
   writing: deepseek-v4-flash@fast
 
 # Plugin behavior settings
